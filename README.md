@@ -1,0 +1,2 @@
+# Settings_Environment
+WindowsやらMacやらWSLやら、環境構築系を集約
