@@ -32,7 +32,7 @@ else
     echo "anyenv: skip."
   fi
 
-  # rbenvでruby3を入れる場合は、apt install zlib1g-devも必要
+  # rbenvでruby3を入れる場合は、`apt install zlib1g-dev`も必要
   for env in "nodenv" "rbenv" "pyenv"
   do
     if [ "$(which ${env})" = "" ]
