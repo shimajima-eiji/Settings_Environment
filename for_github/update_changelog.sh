@@ -23,13 +23,13 @@ then
   stop_flag=true
 fi
 
-if [ "$(git config user.name)" = "" ]
+if [ -z "$(git config user.name)" ]
 then
   echo "[stop] Required `git config user.name.`"
   stop_flag=true
 fi
 
-if [ "$(git config user.email)" = "" ]
+if [ -z "$(git config user.email)" ]
 then
   echo "[stop] Required `git config user.email.`"
   stop_flag=true
@@ -56,8 +56,8 @@ then
   read -p "[input] github token(required permission repo):" GITHUB_REPO_TOKEN
 fi
 
-github_changelog_generator -u ${user} -p ${repository} -t ${GITHUB_REPO_TOKEN} --issues-label "### 終了・または先送りしたissue" --header-label "# 日付順" --unreleased-label "指定なし" -f ${file}
-github-changes -o ${user} -r ${repository} -k ${GITHUB_REPO_TOKEN} --use-commit-body -main -t "タグ別" -z Asia/Tokyo -m "YYYY年M月D日" -n "最終更新" -a -f ${tmpfile} 2>/dev/null
+github_changelog_generator -u ${user} -p ${repository} -t ${GITHUB_REPO_TOKEN} --issues-label "### 終了・または先送りしたissue" --header-label "# 日付順" --unreleased-label "指定なし" -o ${file}
+github-changes -o ${user} -r ${repository} -k ${GITHUB_REPO_TOKEN} --use-commit-body -main -t "タグ別" -z Asia/Tokyo -m "YYYY年M月D日" -n "最終更新" -a -f ${tmpfile}
 
 # 上記github-changesで失敗した場合は古いブランチ(master)の可能性があるので再試行する
 if [ ! -f "${file}" ]
@@ -73,5 +73,5 @@ fi
 
 git add ${file}
 git commit -m "update: ${file}"
-git tag "${date '+v%Y/%m/%d'}"
+git tag "$(date '+v%Y/%m/%d')"
 git push --tags
