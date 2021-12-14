@@ -4,3 +4,7 @@
 
 - windowsの場合: `C:\Users\(ユーザー)\.ssh`
 - Mac/WSL(Linux)の場合: `/home/(ユーザー)/.ssh`
+
+# TortoiseGit(Windows)で使う場合
+id_rsaを`.ppk`に変換する必要がある。
+<br />`PuttyGen`を使うと変換できる。
