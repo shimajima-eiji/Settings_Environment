@@ -2,8 +2,7 @@ echo off
 
 set update_file="dummy"
 
-@if "%1"=""
-(
+@if "%1"=="" (
   echo "[stop] Require argument: path(git clone directory)"
   exit /b
 ) else (
