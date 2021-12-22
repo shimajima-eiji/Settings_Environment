@@ -53,7 +53,7 @@ fi
 
 cd ${git_clone_path}
 
-for now_day in $(seq 0 366)  # 当日を含めるので0からカウント
+for now_day in $(seq 0 380)  # 当日を含めるので0からカウントし、Webから見た時に全て反映させるのに380日分が必要
 do
   if [ "$(uname)" = "Darwin" ]
   then
