@@ -1,7 +1,6 @@
 # `crontab` path
 # WSL(Linux): /var/spool/cron/${USER}
 # Mac: /var/at/tabs/${USER}
-# before: `git clone https://github.com/shimajima-eiji/Settings_Environment.git ~/
 
-0 0 * * * /bin/sh ~/Settings_Environment/for_Mac/brew_upgrade.sh
-0 0 * * * /bin/sh ~/Settings_Environment/for_github/everyday_contribute.sh README git@github.com:shimajima-eiji/README.git
+0 0 * * * /usr/bin/curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/update_mac_summary.sh | /bin/sh -s
+0 0 * * * /usr/bin/curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_github/everyday_contribute.sh | /bin/sh -s README git@github.com:shimajima-eiji/README.git
