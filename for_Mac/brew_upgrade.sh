@@ -5,7 +5,7 @@ log_directory=${1:-~/logs}
 output_path=${log_directory}/brew_upgrade.log
 
 # ルートを指定できないようにする
-if [ "$(${output_path})" = "/" ]
+if [ "$(dirname ${output_path})" = "/" ]
 then
   echo "[Stop] The specified path is the root. ${output_path}"
   exit 1
@@ -27,7 +27,7 @@ then
     log_directory=""
   fi
 fi
-　 
+
 # ログファイルを書き込む場合、既に古いログファイルが存在していたら予め削除しておく
 if [ -n "${log_directory}" -a -f "${output_path}" ]
 then
