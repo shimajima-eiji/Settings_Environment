@@ -9,7 +9,7 @@ for arg in "$@"; do
 
   echo "デバッグ: ${arg}"
 
-  if [ "$(echo "${arg}" | grep -x '-i' -e -x '--install')" ]
+  if [ -n "$(echo "${arg}" | grep -x '-i' -e -x '--install')" ]
   then
     install_flag="-i"
   else
