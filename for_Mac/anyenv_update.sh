@@ -13,7 +13,8 @@ then
     
   else
     echo "[Stop] 'anyenv' not found."
-  exit 1
+    exit 1
+  fi
 fi
 
 # .anyenv 配下にプラグイン管理用のディレクトリ作成
