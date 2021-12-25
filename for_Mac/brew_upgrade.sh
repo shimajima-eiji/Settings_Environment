@@ -4,12 +4,13 @@
 # 後述の引数チェックでログディレクトリを指定しない場合が考えられるため、初期値を入れておく
 log_directory=~/logs
 
-# 引数をチェックし、インストールオプションならインストールフラグを立て、そうでなければ最後の引数をログディレクトリとして扱う
 for arg in "$@"; do
 
   echo "デバッグ: ${arg}"
 
-  if [ -n "$(echo "${arg}" | grep -x -- '-i' -e -x -- '--install')" ]
+  # 引数を-iか--installを完全一致で検索し、ヒットすればインストールフラグを立てる。それ以外の引数はログディレクトリとして扱う
+  # grep -x -- '-i' -e -x -- '--install'は、最初の--で無効化されるため、別プロセスで実行するように条件を書き換えている
+  if [ -n "$(echo "${arg}" | grep -x -- '-i')" -o -n "$(echo "${arg}" | grep -x -- '--install')" ]
   then
     install_flag="-i"
   else
@@ -66,7 +67,7 @@ then
       echo "[Stop] Failed to brew install"
       echo "command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""
       echo ""
-      echo "[Hint] Make sure the path contains ¥$PATH? which brew: /usr/local/bin/brew"
+      echo "[Hint] Make sure the ¥$PATH contains [/usr/local/bin/brew] ?"
       exit 1
     fi
 
