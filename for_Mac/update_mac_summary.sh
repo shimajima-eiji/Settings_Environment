@@ -2,20 +2,18 @@
 # for_Mac以下のアップデートを自動で行うためのスクリプト
 #
 # 呼び出しは以下のように行う
-# `curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/update_mac_summary.sh | sh -s`
-#
+# 更新時    : `curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/update_mac_summary.sh | sh -s`
+# インストール: `curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/update_mac_summary.sh | sh -s -- -i`
 # -iまたは--installを引数に渡すと、インストールを許可する（それぞれのスクリプトを参照）
 
-install_arg=""
+curl_directory=https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac
+install_arg=""  # 初期値はupdateとしたいので空
 
-# 引数がなければupdateとして扱う
-if [ -n "$1" ]
+# 引数が-iか--installの時だけインストールフラグを立てる
+if [ "$1" = "-i" -o "$1" = "--install" ]
 then
-  # -iか--installの時以外はupdateとして扱う
-  if [ "$1" = "-i" | "$1" = "--install" ]
-  then
-    install_arg=$1
-  fi
+  install_arg=$1
 fi
 
-curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/update_mac_summary.sh | sh -s -- ${install_arg}
+curl -sf ${curl_directory}/brew_upgrade.sh | sh -s -- $[install_arg}
+curl -sf ${curl_directory}/anyenv_update.sh | sh -s -- ${install_arg}
