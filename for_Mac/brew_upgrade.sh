@@ -1,11 +1,18 @@
 #!/bin/sh
 # crontabの元ファイルは`/usr/lib/cron/tabs/USER`を参照（要root）
 
-log_directory=${1:~/logs}
+log_directory=${1:-~/logs}
 output_path=${log_directory}/brew_upgrade.log
 
+# ルートを指定できないようにする
+if [ "$(${output_path})" = "/" ]
+then
+  echo "[Stop] The specified path is the root. ${output_path}"
+  exit 1
+fi
+
 # ログを出力するディレクトリを調べる。パスがディレクトリ名と一致したファイルもしくはシンボリックリンクだった場合、ログを作らない
-if [ -f "${log_directory}" | -L "${log_directory}" ]
+if [ -f "${log_directory}" -o -L "${log_directory}" ]
 then
   echo "[Warn]Failed to create log directory: ${log_directory}"
   log_directory=""
@@ -20,9 +27,9 @@ then
     log_directory=""
   fi
 fi
-　
+　 
 # ログファイルを書き込む場合、既に古いログファイルが存在していたら予め削除しておく
-if [ -n "${log_directory}" & -f "${output_path}" ]
+if [ -n "${log_directory}" -a -f "${output_path}" ]
 then
   rm ${output_path}
 fi
