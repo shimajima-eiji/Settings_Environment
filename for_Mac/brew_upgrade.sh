@@ -6,8 +6,6 @@ log_directory=~/logs
 
 for arg in "$@"; do
 
-  echo "デバッグ: ${arg}"
-
   # 引数を-iか--installを完全一致で検索し、ヒットすればインストールフラグを立てる。それ以外の引数はログディレクトリとして扱う
   # grep -x -- '-i' -e -x -- '--install'は、最初の--で無効化されるため、別プロセスで実行するように条件を書き換えている
   if [ -n "$(echo "${arg}" | grep -x -- '-i')" -o -n "$(echo "${arg}" | grep -x -- '--install')" ]
@@ -17,9 +15,6 @@ for arg in "$@"; do
     log_directory="${arg}"
   fi
 done
-
-echo ${log_directory}
-exit 0
 
 output_path=${log_directory}/brew_upgrade.log
 
