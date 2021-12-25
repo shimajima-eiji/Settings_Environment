@@ -6,6 +6,9 @@ log_directory=~/logs
 
 # 引数をチェックし、インストールオプションならインストールフラグを立て、そうでなければ最後の引数をログディレクトリとして扱う
 for arg in "$@"; do
+
+  echo "デバッグ: ${arg}"
+
   if [ "$(echo "${arg}" | grep -x '-i' -e -x '--install')" ]
   then
     install_flag="-i"
@@ -13,6 +16,9 @@ for arg in "$@"; do
     log_directory="${arg}"
   fi
 done
+
+echo ${log_directory}
+exit 0
 
 output_path=${log_directory}/brew_upgrade.log
 
