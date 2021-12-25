@@ -40,12 +40,13 @@ then
   exit 1
 else
   brew upgrade >${output_path}
-  echo "[complate] brew upgrade"
+  message="[complate] brew upgrade. [$(date)]"
+  echo "${message}"
   
   # ログファイルを書く場合のみ、ログファイルにも出力する
   if [ -n "${log_directory}" ]
   then
-    echo "[complate] brew upgrade" >>${output_path}
+    echo "${message}" >>${output_path}
   fi
 fi
 
