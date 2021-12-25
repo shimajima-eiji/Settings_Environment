@@ -20,4 +20,4 @@ then
 fi
 
 # インストールされたenvの一括アップデート
-$ anyenv update
+anyenv update
