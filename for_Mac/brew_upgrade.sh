@@ -6,7 +6,7 @@ log_directory=~/logs
 
 # 引数をチェックし、インストールオプションならインストールフラグを立て、そうでなければ最後の引数をログディレクトリとして扱う
 for arg in "$@"; do
-  if [ "$(echo #@ | grep -x '-i' -e -x '--install')" ]
+  if [ "$(echo "$@" | grep -x '-i' -e -x '--install')" ]
   then
     install_flag="-i"
   else
