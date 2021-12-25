@@ -6,5 +6,13 @@ if [ -f "${output_path} " ]
 then
   rm ${output_path}
 fi
-/usr/local/bin/brew upgrade >${output_path}
-echo "[complate] brew upgrade" >>${output_path}
+
+if [ -z "$(which brew)" ]
+then
+  echo "[Stop] brew not found."
+  exit 1
+else
+  brew upgrade >${output_path}
+  echo "[complate] brew upgrade" >>${output_path}
+fi
+
