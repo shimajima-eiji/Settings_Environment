@@ -1,9 +1,18 @@
 #!/bin/sh
 # Thanks: https://zenn.dev/ryuu/articles/use-anyversions
 
+install_arg=$1
+
 if [ -z "$(which anyenv)" ]
 then
-  echo "[Stop] 'anyenv' not found."
+
+  # 引数があればインストールオプションとして扱うため、brew_upgrade.shのような厳密なロジックを入れない
+  if [ -n "${install_arg}" ]
+  then
+    echo "[Info] 'anyenv' not found. install by brew"
+    
+  else
+    echo "[Stop] 'anyenv' not found."
   exit 1
 fi
 
