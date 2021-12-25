@@ -1,7 +1,19 @@
 #!/bin/sh
 # crontabの元ファイルは`/usr/lib/cron/tabs/USER`を参照（要root）
 
-log_directory=${1:-~/logs}
+# 後述の引数チェックでログディレクトリを指定しない場合が考えられるため、初期値を入れておく
+log_directory=~/logs
+
+# 引数をチェックし、インストールオプションならインストールフラグを立て、そうでなければ最後の引数をログディレクトリとして扱う
+for arg in "$@"; do
+  if [ "$(echo #@ | grep -x '-i' -e -x '--install')" ]
+  then
+    install_flag="-i"
+  else
+    log_directory="${arg}"
+  fi
+done
+
 output_path=${log_directory}/brew_upgrade.log
 
 # ルートを指定できないようにする
@@ -36,8 +48,29 @@ fi
 
 if [ -z "$(which brew)" ]
 then
-  echo "[Stop] brew not found."
-  exit 1
+
+  # brewのインストールフラグがあればインストール
+  if [ -n "${install_flag}" ]
+  then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
+    # brewのインストールに失敗した場合、updateはできないので終了する
+    if [ -z "$(which brew)" ]
+    then
+      echo "[Stop] Failed to brew install"
+      echo "command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""
+      echo ""
+      echo "[Hint] Make sure the path contains ¥$PATH? which brew: /usr/local/bin/brew"
+      exit 1
+    fi
+
+  # インストールフラグがなければ終了
+  else
+    echo "[Stop] brew not found."
+    exit 1
+  fi
+
+# brewが存在していればupdateを実行
 else
   brew upgrade >${output_path}
   message="[complate] brew upgrade. [$(date)]"
