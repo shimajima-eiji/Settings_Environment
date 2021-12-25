@@ -15,5 +15,5 @@ then
   install_arg=$1
 fi
 
-curl -sf ${curl_directory}/brew_upgrade.sh | sh -s -- $[install_arg}
+curl -sf ${curl_directory}/brew_upgrade.sh | sh -s -- ${install_arg}
 curl -sf ${curl_directory}/anyenv_update.sh | sh -s -- ${install_arg}
