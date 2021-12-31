@@ -2,6 +2,8 @@
 # @param
 # [*]$1: git clone path
 # $2: repository url(https/ssh)
+#
+# eg: curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_github/everyday_contribute.sh | sh -s -- README https://github.com/shimajima-eiji/README
 
 update_file="dummy"
 
