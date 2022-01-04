@@ -2,6 +2,9 @@
 ### 要準備
 ### 予めwikiとwiki用のリポジトリを作成しておく
 
+### 使い方
+### curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/contri_wiki/for_github/wiki_contribute.sh | sh -s -- リポジトリ ユーザー
+
 # 引数処理
 repository=$1
 user=${2:-shimajima-eiji}
