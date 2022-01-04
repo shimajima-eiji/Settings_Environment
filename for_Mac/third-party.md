@@ -6,6 +6,8 @@
 
 ## 開発
 ### ターミナル 
+なるべく[setup.sh](https://github.com/shimajima-eiji/Settings_Environment/blob/main/for_Mac/setup.sh)に集約する。
+
 - [brew](https://brew.sh/index_ja)
 
 ```
