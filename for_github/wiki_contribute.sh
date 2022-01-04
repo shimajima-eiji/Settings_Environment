@@ -21,22 +21,35 @@ clone_directory=${repository}.wiki
 wiki_repository=https://github.com/${user}/${clone_directory}.git
 contribute_repository=https://github.com/${user}/__${repository}_wiki.git
 
+# 後でディレクトリを削除するためにcloneしたか判定する
+clone_flag=false
 if [ ! -d "${repository}.wiki" ]
 then
-  git clone ${wiki_repository}
+  git clone ${wiki_repository}  
+
+  # 失敗したら処理を中断する
   if [ "$?" -ne 0 ]
   then
     echo "[Stop]Failed git clone ${wiki_repository}"
+    rm -rf "${wiki_repository}"
     exit 1
   fi
 fi
 
-cd ${clone_directory}
+cd "${clone_directory}"
 git pull
-git push --mirror ${contribute_repository}
+git push --mirror "${contribute_repository}"
 
 if [ "$?" -ne 0 ]
 then
   echo "[ERROR]Failed git push --mirror ${contribute_repository}"
   exit 1
 fi
+
+if [ "${clone_flag}" = true ]
+then
+  rm -rf "${clone_directory}"
+  echo "[INFO]Remove cloned directory : ${clone_directory}"
+fi
+
+echo "[COMPLETE]wiki_contribute.sh."
