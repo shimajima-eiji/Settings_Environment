@@ -16,7 +16,7 @@ fi
 # 紛らわしいので名付けをしておく
 clone_directory=${repository}.wiki
 wiki_repository=https://github.com/${user}/${clone_directory}.git
-contribute_repository=https://github.com/${user}/${repository}_wiki.git
+contribute_repository=https://github.com/${user}/__${repository}_wiki.git
 
 if [ ! -d "${repository}.wiki" ]
 then
