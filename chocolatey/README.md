@@ -8,6 +8,8 @@ powershellで以下を実行する
 choco install %config_path%
 ```
 
+インストールしたパッケージは、`C:\ProgramData\chocolatey\lib`以下に格納されている（要管理者権限）
+
 ### コード解説
 上から順番に、
 
