@@ -21,8 +21,9 @@ Webパネルと拡張機能、検索エンジンを設定する。
 |[Google翻訳](https://translate.google.co.jp/?hl=ja)|(※1)翻訳||
 |[DeepL翻訳](https://www.deepl.com/ja/translator)|(※1)翻訳||
 |[GoogleMap](https://www.google.co.jp/maps/?hl=ja)|その他Webサービス|所在地をクリップした状態にしておくとなお良し|
-|<a href="chrome://apps">apps</a>|その他Webサービス|Chrome専用のアプリもあるので注意|
+|apps(chrome://apps)|その他Webサービス|Chrome専用のアプリもあるので注意|
 |[tor接続確認](https://check.torproject.org/)|その他Webサービス||
+|[AirMore](http://web.airmore.com/)|その他Webサービス|QRコードでどのような端末とも手軽に連携できる|
 
 ### 注釈
 - (※1): 【翻訳】複数持っておくとベター。拡張機能があるならそちらがおすすめ
