@@ -36,6 +36,9 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[Gカレンダー](https://calendar.google.com/calendar/u/0/gp?hl=ja#~calendar:view=m)|その他Webサービス||
 |[サクラチェック](https://sakura-checker.jp)|その他Webサービス||
 
+### 注釈
+- (※1): 【翻訳】複数持っておくとベター。拡張機能があるならそちらがおすすめ
+
 ## 動画
 |名称|分類|解説|
 |---|---|---|
@@ -61,6 +64,3 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[Google Education](https://edu.google.com/intl/ALL_jp/)|講演後のクラス経営ツール|
 |[配信投げ銭](https://doneru.jp)|ライブ配信を収益化。スーパーチャットは要件キツいし、広告収益とは別の扱い|
 |[嫁イラスト](https://waifulabs.com)||
-
-### 注釈
-- (※1): 【翻訳】複数持っておくとベター。拡張機能があるならそちらがおすすめ
