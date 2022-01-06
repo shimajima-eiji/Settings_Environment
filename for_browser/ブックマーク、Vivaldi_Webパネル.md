@@ -31,6 +31,8 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[Google翻訳](https://translate.google.co.jp/?hl=ja)|(※1)翻訳||
 |[DeepL翻訳](https://www.deepl.com/ja/translator)|(※1)翻訳||
 |[フォント](https://fontfree.me)|チートシート||
+|[iPhoneを探す](https://www.icloud.com/find)|遺失物捜索||
+|[スマートフォン(Android)を探す](https://myaccount.google.com/find-your-phone)|遺失物捜索||
 |[GoogleMap](https://www.google.co.jp/maps/?hl=ja)|その他Webサービス|所在地をクリップした状態にしておくとなお良し|
 |[tor接続確認](https://check.torproject.org)|その他Webサービス||
 |[AirMore](http://web.airmore.com/)|その他Webサービス|QRコードでどのような端末とも手軽に連携できる|
