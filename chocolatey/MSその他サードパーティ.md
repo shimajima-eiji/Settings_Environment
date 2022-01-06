@@ -18,3 +18,4 @@ chocolateyの性質上、Windowsを対象としているのでここに分類す
 |[LINE](https://www.microsoft.com/store/productId/9WZDNCRFJ2G6)|コミュニケーション||
 |[Slack](https://www.microsoft.com/ja-jp/p/slack/9wzdncrdk3wp)|コミュニケーション||
 |[日本語ローカルエクスペリエンス](https://www.microsoft.com/store/productId/9N1W692FV4S1)|システム|これがないとWindowsの日本語化が消える。よくわからないけど消してはいけないもの|
+|[Client 4 Google Drive](https://www.microsoft.com/ja-jp/p/client-4-google-drive/9nblggh3rm3r)|ストレージ||
