@@ -27,5 +27,5 @@
 |---|---|
 |[Google Apps Script GitHub アシスタント](https://chrome.google.com/webstore/detail/google-apps-script-github/lfjcgcmkmjjlieihflfhjopckgpelofo/related?hl=ja)|Chrome専用: GASのWebエディタを使うならGithub連携に必須|
 |[OctoLinker](https://chrome.google.com/webstore/detail/octolinker/jlmafbaeoofdegohdhinkhilhclaklkp)||
-|[Short URL One Click](https://chrome.google.com/webstore/detail/short-url-one-click/opkochckhaddggppefiojeffdiaeimjm)||
+|[Short URL One Click](https://chrome.google.com/webstore/detail/url-shortener/godoifjoiadanijplaghmhgfeffnblib)|2022/1時点で使えるが、使えなくなったサービスがいくつもあるので注意。|
 |[Chrometana - Redirect Bing Somewhere Better](https://chrome.google.com/webstore/detail/chrometana-redirect-bing/kaicbfmipfpfpjmlbpejaoaflfdnabnc)||
