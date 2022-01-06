@@ -1,8 +1,10 @@
 ## 拡張機能
-何でもかんでも入れればよいというものではないので、ブラウザごとに用途に応じて使い分けること
+何でもかんでも入れればよいというものではないので、ブラウザごとに用途に応じて使い分けるべき。
 
 |名称(リンク)|分類|解説|
 |---|---|---|
+|[crxMouse Chrome Gestures](https://chrome.google.com/webstore/detail/crxmouse-chrome-gestures/jlgkpaicikihijadgifklkbpdajbkhjo?hl=ja)|ユーティリティ|マウスジェスチャーに対応していないブラウザ向け|
+|[Dark Reader](https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh)|ユーティリティ|適用されなかったり微妙な色合いだったりする事もあれば、サイト専用のものもあるので使い分けよう|
 |[Quick Javascript Switcher](https://chrome.google.com/webstore/detail/quick-javascript-switcher/geddoclleiomckbhadiaipdggiiccfje)|セキュリティ|過去にjsoffがあったが、これと同じ|
 |[VPN Free - Betternet Unlimited VPN Proxy](https://chrome.google.com/webstore/detail/vpn-free-betternet-unlimi/gjknjjomckknofjidppipffbpoekiipm)|セキュリティ|IPアドレスを隠したいだけならVPN Free。無料VPNのため扱い注意。|
 |[Onion Browser Button](https://chrome.google.com/webstore/detail/onion-browser-button/fockhhgebmfjljjmjhbdgibcmofjbpca?hl=en)|セキュリティ|[設定方法](https://qiita.com/___xxx_/items/b2a89082abd86b3e66e2)。気軽に使えるが、本来は[Tor Browser](https://www.torproject.org)を使うべき|
