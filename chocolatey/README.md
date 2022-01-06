@@ -1,7 +1,8 @@
 固有の設定ファイル等については.gitignoreに登録する事があるため、cloneして利用する際は注意
 
-##　インストール
+## インストール
 powershellで以下を実行する
+
 ```
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 choco install %config_path%
