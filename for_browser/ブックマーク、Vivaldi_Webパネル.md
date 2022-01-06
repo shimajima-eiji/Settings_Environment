@@ -12,6 +12,7 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[slack](https://app.slack.com/client)|コミュニケーション||
 |[Twitter](https://twitter.com)|コミュニケーション|TweetDeckなどTwitter用Webクライアントサービスも候補|
 |[discord](https://discord.com)|コミュニケーション||
+|[spir](https://app.spirinc.com/list/availability)|コミュニケーション|日程調整カレンダー|
 |[Gmail](https://mail.google.com/mail)|Webメーラー||
 |[Windows Live Mail(Outlook)](https://outlook.live.com/mail/0/inbox)|Webメーラー||
 |[Youtube](https://www.youtube.com)|配信サイト||
