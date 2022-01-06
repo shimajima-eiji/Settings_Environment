@@ -8,6 +8,7 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 ## 推奨
 |名称|分類|解説|
 |---|---|---|
+|apps(chrome://apps)|設定|Chrome専用のアプリもあるので注意|
 |[slack](https://app.slack.com/client)|コミュニケーション||
 |[Twitter](https://twitter.com)|コミュニケーション|TweetDeckなどTwitter用Webクライアントサービスも候補|
 |[discord](https://discord.com)|コミュニケーション||
@@ -20,6 +21,7 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[microCMS](https://secret.microcms.io)|開発アプリ・サービス||
 |[Github](https://github.com/shimajima-eiji?tab=stars)|開発アプリ・サービス||
 |[AIのべりすと](https://ai-novel.com/)|開発アプリ・サービス||
+|[デコレーションジェネレータ](https://generator.tubudeco.com/g2281)|開発アプリ・サービス||
 |[OneDrive](https://onedrive.live.com)|ストレージ||
 |[icloud](https://www.icloud.com)|ストレージ||
 |[GDrive](https://drive.google.com/drive/my-drive)|ストレージ||
@@ -29,11 +31,9 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[DeepL翻訳](https://www.deepl.com/ja/translator)|(※1)翻訳||
 |[フォント](https://fontfree.me)|チートシート||
 |[GoogleMap](https://www.google.co.jp/maps/?hl=ja)|その他Webサービス|所在地をクリップした状態にしておくとなお良し|
-|apps(chrome://apps)|その他Webサービス|Chrome専用のアプリもあるので注意|
-|[tor接続確認](https://check.torproject.org/)|その他Webサービス||
+|[tor接続確認](https://check.torproject.org)|その他Webサービス||
 |[AirMore](http://web.airmore.com/)|その他Webサービス|QRコードでどのような端末とも手軽に連携できる|
 |[Gカレンダー](https://calendar.google.com/calendar/u/0/gp?hl=ja#~calendar:view=m)|その他Webサービス||
-|[デコレーションジェネレータ](https://generator.tubudeco.com/g2281)|その他Webサービス||
 |[サクラチェック](https://sakura-checker.jp)|その他Webサービス||
 
 ## 動画
@@ -51,6 +51,16 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[環境構築](https://www.youtube.com/watch?v=c1znEwUbCpc)|MIDI||
 |[作り方](https://www.youtube.com/watch?v=Glz2gn6hLBk)|MIDI||
 |[プロの豚汁](https://www.youtube.com/watch?v=VOKJIqFQd8Y)|料理||
+
+## よく忘れるもの
+|名称|解説|
+|---|---|
+|[エクセル簿記](http://management.main.jp/excelb.html)||
+|[ふるさと納税シミュレーター](https://www.furusato-tax.jp/about/simulation)||
+|[katacoda](https://katacoda.com)|勉強会や講演をやる時に使える|
+|[Google Education](https://edu.google.com/intl/ALL_jp/)|講演後のクラス経営ツール|
+|[配信投げ銭](https://doneru.jp)|ライブ配信を収益化。スーパーチャットは要件キツいし、広告収益とは別の扱い|
+|[嫁イラスト](https://waifulabs.com)||
 
 ### 注釈
 - (※1): 【翻訳】複数持っておくとベター。拡張機能があるならそちらがおすすめ
