@@ -10,6 +10,7 @@
 |[AmazonPhotosSetup](https://amzn.to/3fHXZ8f)|開発支援||
 |[BlueStacks](https://www.bluestacks.com/ja/index.html)|開発支援||
 |[JoyToKey](https://joytokey.net/ja/download)|開発支援|chocolateyにもあるが、インストールに失敗する|
+|[tortoisegit](https://tortoisegit.org/)|開発支援|日本語化パッチもダウンロードする必要あり|
 
 ## Microsoft Store
 chocolateyの性質上、Windowsを対象としているのでここに分類する。
