@@ -11,6 +11,7 @@
 |[BlueStacks](https://www.bluestacks.com/ja/index.html)|開発支援||
 |[JoyToKey](https://joytokey.net/ja/download)|開発支援|chocolateyにもあるが、インストールに失敗する|
 |[tortoisegit](https://tortoisegit.org/)|開発支援|日本語化パッチもダウンロードする必要あり|
+|[RPGツクールRTP](https://tkool.jp/products/rtp.html)|ゲーム|ツクールXP以前のパッケージが必要な場合。XP, VX, VXAceは入れている。|
 
 ## Microsoft Store
 chocolateyの性質上、Windowsを対象としているのでここに分類する。
