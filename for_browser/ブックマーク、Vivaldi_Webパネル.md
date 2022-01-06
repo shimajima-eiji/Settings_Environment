@@ -19,6 +19,7 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[GAS](https://script.google.com/home)|開発アプリ・サービス||
 |[microCMS](https://secret.microcms.io)|開発アプリ・サービス||
 |[Github](https://github.com/shimajima-eiji?tab=stars)|開発アプリ・サービス||
+|[AIのべりすと](https://ai-novel.com/)|開発アプリ・サービス||
 |[OneDrive](https://onedrive.live.com)|ストレージ||
 |[icloud](https://www.icloud.com)|ストレージ||
 |[GDrive](https://drive.google.com/drive/my-drive)|ストレージ||
@@ -33,10 +34,13 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[AirMore](http://web.airmore.com/)|その他Webサービス|QRコードでどのような端末とも手軽に連携できる|
 |[Gカレンダー](https://calendar.google.com/calendar/u/0/gp?hl=ja#~calendar:view=m)|その他Webサービス||
 |[デコレーションジェネレータ](https://generator.tubudeco.com/g2281)|その他Webサービス||
+|[サクラチェック](https://sakura-checker.jp)|その他Webサービス||
 
 ## 動画
 |名称|分類|解説|
 |---|---|---|
+|[マインドマップ動画](https://www.youtube.com/c/ryogakucho)|配信資料|内容ではなく、小道具や収録環境などに着目する。話の組み立て方など|
+|[ホワイトボード動画](https://www.youtube.com/watch?v=lulU1dVxbP4)|配信資料|内容ではなく、小道具や収録環境などに着目する。話の組み立て方など|
 |[お絵かきリスト](https://www.youtube.com/playlist?list=PLRk5UXE-1F1EGYbLixgwc-ea24NdipGSf)|イラスト勉強||
 |[人体の比率を覚えれば人物イラストが上手になる！ アタリの取り方講座](https://ichi-up.net/2016/132)|イラスト勉強||
 |[ピアノ](https://www.youtube.com/watch?v=niA0nis1W7w)|音楽勉強||
