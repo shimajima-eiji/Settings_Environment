@@ -5,34 +5,24 @@ Webパネルと拡張機能、検索エンジンを設定する。
 アカウントに紐付いたりインポート出来ないので、諦めて手動で追加する。
 
 ## 推奨
-### コミュニケーション
-- slack(https://app.slack.com/client/.../... :)
-- [Twitter](https://twitter.com)
-  - TweetDeckなどTwitter用Webクライアントサービスも候補
-- [discord](https://discord.com)
+|名称|分類|解説|
+|---|---|---|
+|[slack](https://app.slack.com/client)|コミュニケーション||
+|[Twitter](https://twitter.com)|コミュニケーション|TweetDeckなどTwitter用Webクライアントサービスも候補|
+|[discord](https://discord.com)|コミュニケーション||
+|[Gmail](https://mail.google.com/mail)|Webメーラー||
+|[Windows Live Mail(Outlook)](https://outlook.live.com/mail/0/inbox)|Webメーラー||
+|[Youtube](https://www.youtube.com)|配信サイト||
+|[OneDrive](https://onedrive.live.com)|ストレージ||
+|[icloud](https://www.icloud.com)|ストレージ||
+|[GDrive](https://drive.google.com/drive/my-drive)|ストレージ||
+|[Dropbox](https://www.dropbox.com)|ストレージ||
+|[Amazon Drive](https://www.amazon.co.jp/clouddrive)|ストレージ||
+|[Google翻訳](https://translate.google.co.jp/?hl=ja)|(※1)翻訳||
+|[DeepL翻訳](https://www.deepl.com/ja/translator)|(※1)翻訳||
+|[GoogleMap](https://www.google.co.jp/maps/?hl=ja)|その他Webサービス|所在地をクリップした状態にしておくとなお良し|
+|<a href="chrome://apps">apps</a>|その他Webサービス|Chrome専用のアプリもあるので注意|
+|[tor接続確認](https://check.torproject.org/)|その他Webサービス||
 
-### Webメーラー
-- [Gmail](https://mail.google.com/mail)
-- [Windows Live Mail(Outlook)](https://outlook.live.com/mail/0/inbox)
-
-### 配信サイト
-- [Youtube](https://www.youtube.com)
-
-### ストレージ系
-- [OneDrive](https://onedrive.live.com)
-- [icloud](https://www.icloud.com)
-- [GDrive](https://drive.google.com/drive/my-drive)
-- [Dropbox](https://www.dropbox.com)
-- [Amazon Drive](https://www.amazon.co.jp/clouddrive)
-
-### 地図サービス。よく使う場所を指定して登録すると開いた瞬時に確認できる
-- [GoogleMap](https://www.google.co.jp/maps/?hl=ja)
-  - 所在地をクリップした状態にしておくとなお良し
-### よく紛失するもの
-- apps(chrome://apps/)
-- [tor接続確認](https://check.torproject.org/)
-
-## 候補
-### 翻訳。複数持っておくとベター。拡張機能（後述）があるならそっちがおすすめ。重い場合はWebパネルを使う
-- [Google翻訳](https://translate.google.co.jp/?hl=ja)
-- [DeepL翻訳](https://www.deepl.com/ja/translator)
+### 注釈
+- (※1): 【翻訳】複数持っておくとベター。拡張機能があるならそちらがおすすめ
