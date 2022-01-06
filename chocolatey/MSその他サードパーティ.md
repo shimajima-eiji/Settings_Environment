@@ -5,6 +5,8 @@
 |[Vrew](https://vrew.voyagerx.com/ja/)|配信関連||
 |[恋声](http://koigoemoe.g2.xrea.com/koigoe/koigoe.html)|配信関連||
 |[Voicemeeter_Banana](https://vb-audio.com/Voicemeeter/index.htm)|配信関連||
+|[Selenium](https://www.selenium.dev/ja/documentation/)|開発支援|バージョンやパッケージにより挙動が異なる|
+|[UWSC](http://canal22.org/download/)|開発支援|本家は終了しているのでVectorでダウンロード|
 |[AmazonPhotosSetup](https://amzn.to/3fHXZ8f)|開発支援||
 |[BlueStacks](https://www.bluestacks.com/ja/index.html)|開発支援||
 |[JoyToKey](https://joytokey.net/ja/download)|開発支援|chocolateyにもあるが、インストールに失敗する|
