@@ -1,3 +1,18 @@
+## cinst
+入れたものに限り解説。
+
+### tablacus explorer
+`C:\ProgramData\chocolatey\lib\tablacus`に設定が入っているので、この中を弄る。  
+tablacus以下のディレクトリをなんとなくそれっぽい場所に置けば設定が自動的に適用されていることがわかるはず。  
+インストール時点で入れたアドオンは消しているので、手間ならこのタイミングで削除してしまうとよい。
+
+### VSCode
+Settings Syncを入れてgithubログイン。  
+Shift+P「sync」でダウンロードしたら環境構築が自動的に完了する。
+
+### GoogleIME
+キー設定をMicrosoftIME以外に変えたい場合のみ。
+
 ## その他サードパーティー
 |名称|分類|解説|
 |---|---|---|
