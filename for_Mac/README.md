@@ -35,4 +35,5 @@ curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/m
 ## その他インストーラを使用したもの
 |パッケージ名|用途|
 |---|---|
+|[Command Line Tools for Xcode](https://developer.apple.com/download/all/?q=for%20Xcode)|`xcode-select --install`では入ってこない開発用ツール。ないと一部コマンドが動かない|
 |[PlayOnMac](https://www.playonmac.com)|exeファイル(Windowsの実行形式)をMacで動かすために必要|
