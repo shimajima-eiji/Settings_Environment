@@ -33,8 +33,8 @@ sudoでインストールする必要がある場合、brewでインストール
 |パッケージ名|用途|
 |---|---|
 |github-changes||
-|github_changelog_generator||
-|reveal-ck|`slides.md`からRevealJSを作るために必要。インストールできない場合は、`rbenv local system`で一時的に退避する事が可能|
+|github_changelog_generator|インストールできない場合は、`rbenv local system`で一時的に退避する事が可能|
+|<s>reveal-ck</s>|<s>`slides.md`からRevealJSを作るために必要</s>VSCodeで作る方法にしたため不要|
 
 ### ○○env localの仕様
 カレントに `.○○_version`を作り、`env local`で指定したものがある。  
@@ -51,4 +51,5 @@ sudoでインストールする必要がある場合、brewでインストール
 |パッケージ名|用途|
 |---|---|
 |[Command Line Tools for Xcode](https://developer.apple.com/download/all/?q=for%20Xcode)|`xcode-select --install`では入ってこない開発用ツール。ないと一部コマンドが動かない|
+|[VSCode](https://code.visualstudio.com/)|[RevealJS](https://marketplace.visualstudio.com/items?itemName=evilz.vscode-reveal)もこれで作る。|
 |[PlayOnMac](https://www.playonmac.com)|exeファイル(Windowsの実行形式)をMacで動かすために必要|
