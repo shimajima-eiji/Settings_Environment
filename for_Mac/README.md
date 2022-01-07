@@ -27,6 +27,21 @@ curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/m
 - anyenvはbrewで管理するなら必要ではない。
   - ただし、brewでの管理をやめてanyenvに移行する記事も多く見つかることから、一長一短な部分がある。
 
+## brewでインストールしないパッケージ
+sudoでインストールする必要がある場合、brewでインストールしたユーザーディレクトリ以下の実行ファイルを参照する事ができないため、エラーになる。
+
+|パッケージ名|用途|
+|---|---|
+|github-changes||
+|github_changelog_generator||
+|reveal-ck|`slides.md`からRevealJSを作るために必要。インストールできない場合は、`rbenv local system`で一時的に退避する事が可能|
+
+### ○○env localの仕様
+カレントに `.○○_version`を作り、`env local`で指定したものがある。  
+これを削除すると、コマンド自体をなかったことにできるので、普段使いはenvだが一時的にsystem(sudo)を使いたい場合などは`local system`とする。
+
+今のところ問題はなかった。
+
 ## App Store
 |パッケージ名|用途|
 |---|---|
