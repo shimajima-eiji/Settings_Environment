@@ -45,7 +45,8 @@ sudoでインストールする必要がある場合、brewでインストール
 ## App Store
 |パッケージ名|用途|
 |---|---|
-|Xcode|iOSアプリ開発に必須|
+|[Xcode](https://apps.apple.com/jp/app/xcode/id497799835?mt=12)|iOSアプリ開発に必須|
+|[the-unarchiver](https://apps.apple.com/jp/app/the-unarchiver/id425424353?mt=12)|7zなどの解凍に必要|
 
 ## その他インストーラを使用したもの
 |パッケージ名|用途|
