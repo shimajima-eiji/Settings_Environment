@@ -5,6 +5,12 @@ curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/m
 .gitや.githubディレクトリなど、隠しファイルは対象にしない。
 COMMENT
 
+if [ -z "$(which cwebp)" ]
+then
+  echo "[Stop] not found 'cwebp'."
+  exit 1
+fi
+
 # ディレクトリパスを引数に指定する
 arg=$1
 if [ ! -d "${arg}" ]
