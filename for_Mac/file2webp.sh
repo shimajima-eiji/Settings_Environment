@@ -24,8 +24,8 @@ find_file () {
   if [ -f "${arg}" ]
   then
 
-    # 拡張子がwebp以外のファイルなら変換
-    if [ ! "${arg##*.}" = "webp" ]
+    # 拡張子がwebp以外のファイル　かつ　webpに変換されていない場合に変換
+    if [ ! "${arg##*.}" = "webp" -a ! -f "${arg%.*}.webp" ]
     then
       cwebp "${arg}" -o "${arg%.*}.webp" 2>/dev/null
       if [ "$?" -eq 0 ]
