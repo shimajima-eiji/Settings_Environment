@@ -1,9 +1,7 @@
 #!/bin/sh
-: >>COMMENT
-need `brew install cwebp`
-curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/file2webp.sh | sh -s -- (ディレクトリパス)
-.gitや.githubディレクトリなど、隠しファイルは対象にしない。
-COMMENT
+### need `brew install cwebp`
+### curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/file2webp.sh | sh -s -- (ディレクトリパス)
+### .gitや.githubディレクトリなど、隠しファイルは対象にしない。
 
 if [ -z "$(which cwebp)" ]
 then
