@@ -17,6 +17,7 @@ then
   exit 1
 fi
 
+count=0  # webpファイルを作った数をカウント
 find_file () {
   arg="$1"
 
@@ -31,6 +32,7 @@ find_file () {
       if [ "$?" -eq 0 ]
       then
         echo "[COMPLETE] ($(pwd)/)${arg} -> ${arg%.*}.webp"
+        count=$((count+1))
 
       else
         echo "[Skip] ($(pwd)/${arg}) can't convert."
@@ -51,3 +53,4 @@ find_file () {
 }
 
 find_file "${arg}"
+echo "${count}"
