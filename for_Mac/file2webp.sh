@@ -19,7 +19,7 @@ then
   exit 1
 fi
 
-function find_file() {
+find_file () {
   arg="$1"
 
   # 変数がファイルならwebpに変換。
