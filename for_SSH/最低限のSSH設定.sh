@@ -10,7 +10,7 @@ COMMENT
 
 # サーバー側: ssh_serverユーザーで実施
 sudo ssh-keygen -A
-sed -i -e "s/^PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config  # vi /etc/ssh/sshd_configで変更するのと同じ
+sudo sed -i -e "s/^PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config  # vi /etc/ssh/sshd_configで変更するのと同じ
 sudo service ssh restart
 
 # クライアント側: 何でもOK
