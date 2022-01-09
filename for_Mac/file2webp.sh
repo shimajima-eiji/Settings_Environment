@@ -1,6 +1,9 @@
 #!/bin/sh
-### need `brew install cwebp`
-### curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/file2webp.sh
+: >>COMMENT
+need `brew install cwebp`
+curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/file2webp.sh | sh -s -- (ディレクトリパス)
+.gitや.githubディレクトリなど、隠しファイルは対象にしない。
+COMMENT
 
 # ディレクトリパスを引数に指定する
 arg=$1
