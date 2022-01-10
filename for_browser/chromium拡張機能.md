@@ -13,7 +13,7 @@
 |[DuckDuckGo Privacy Essentials](https://chrome.google.com/webstore/detail/duckduckgo-privacy-essent/bkdgflcldnnnapblkhphbgpggdiikppg?hl=ja)|トラッキング防止||
 |[Avast Online Security](https://chrome.google.com/webstore/detail/avast-online-security/gomekmidlodglbbmalcneegieacbdmki?hl=ja)|トラッキング防止||
 |[Skip Redirect](https://chrome.google.com/webstore/detail/skip-redirect/jaoafjdoijdconemdmodhbfpianehlon)|トラッキング防止||
-|[Google Apps Script GitHub アシスタント](https://chrome.google.com/webstore/detail/google-apps-script-github/lfjcgcmkmjjlieihflfhjopckgpelofo/related?hl=ja)|開発支援|Chrome専用: GASのWebエディタを使うならGithub連携に必須|
+|[Google Apps Script GitHub アシスタント](https://chrome.google.com/webstore/detail/google-apps-script-github/lfjcgcmkmjjlieihflfhjopckgpelofo/related?hl=ja)|開発支援|Chrome専用: GASのWebエディタを使うならGithub連携に必須<br>[Personal access tokens](https://github.com/settings/tokens)でrepoとgist（使う方だけでも可）を採用する|
 |[OctoLinker](https://chrome.google.com/webstore/detail/octolinker/jlmafbaeoofdegohdhinkhilhclaklkp)|開発支援|GitHubのコードをツリー表示できる。|
 |[URL Shortener](https://chrome.google.com/webstore/detail/url-shortener/godoifjoiadanijplaghmhgfeffnblib)|開発支援|2022/1時点で使えるが、使えなくなったサービスがいくつもあるので注意。|
 |[Chrometana - Redirect Bing Somewhere Better](https://chrome.google.com/webstore/detail/chrometana-redirect-bing/kaicbfmipfpfpjmlbpejaoaflfdnabnc)|開発支援||
