@@ -28,7 +28,7 @@ Webパネルに入れず、ブックマークに入れるのも一手か。
 |[デコレーションジェネレータ](https://generator.tubudeco.com/g2281)|開発アプリ・サービス||
 |[LINE Notify](https://notify-bot.line.me/ja)|開発アプリ・サービス|notifyアカウントがなくても、botアカウントで入力受付ができるからいらないかも？|
 |[LINE MessageAPI](https://developers.line.biz/console)|開発アプリ・サービス|WebhookURLの変更など|
-|[LINE Manager](https://manager.line.biz)|開発アプリ・サービス|メッセージ（リッチメニュー）など|
+|[LINE Official Account Manager](https://manager.line.biz)|開発アプリ・サービス|メッセージ（リッチメニュー）など|
 |[canva](https://www.canva.com/folder/all-designs)|開発アプリ・サービス|プレゼンの表紙作成など|
 |[OneDrive](https://onedrive.live.com)|ストレージ||
 |[icloud](https://www.icloud.com)|ストレージ||
