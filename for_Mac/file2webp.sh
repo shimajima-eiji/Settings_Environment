@@ -29,11 +29,23 @@ find_file () {
     if [ ! "${arg##*.}" = "webp" -a ! -f "${arg%.*}.webp" ]
     then
       cwebp "${arg}" -o "${arg%.*}.webp" 2>/dev/null
+      
+      # webp化に成功
       if [ "$?" -eq 0 ]
       then
-        echo "[COMPLETE] ($(pwd)/)${arg} -> ${arg%.*}.webp"
-        count=$((count+1))
+      
+        # webpの方のファイルサイズが小さい場合
+        if [ "$(wc -c ${arg} | cut -d' ' -f1)" -gt "$(wc -c ${arg%.*}.webp | cut -d' ' -f1)" ]
+        then
+          echo "[COMPLETE] ($(pwd)/)${arg} -> ${arg%.*}.webp"
+          count=$((count+1))
 
+        # webpの方のファイルサイズが大きい場合
+        else
+          rm ${arg%.*}.webp
+          echo "[Deleete] ($(pwd)/${arg%.*}.webp): size larged."
+          
+      # webp化に失敗
       else
         echo "[Skip] ($(pwd)/${arg}) can't convert."
       fi
