@@ -44,7 +44,8 @@ find_file () {
         else
           rm ${arg%.*}.webp
           echo "[Deleete] ($(pwd)/${arg%.*}.webp): size larged."
-          
+        fi
+        
       # webp化に失敗
       else
         echo "[Skip] ($(pwd)/${arg}) can't convert."
