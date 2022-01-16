@@ -38,6 +38,13 @@ run () {
     return 1
   fi
 
+  # ログファイルは対象にしない
+  if [ "${arg##*.}" = "log" ]
+  then
+    echo "[Skip] File is exclude extension[.log]: ${arg}"
+    return 1
+  fi
+  
   # ファイル名が「_」から始まる場合は対象にしない
   if [ "$(basename "${arg}" | cut -c1 )" = "_" ]
   then
@@ -83,7 +90,8 @@ run () {
   echo "[INFO] Run translate(${target}): ${arg} -> ${transfile}"
 
   row_count=0
-  echo >curl_gas.log
+  curl_log=curl_gas.log
+  echo >${curl_log}
   while read line
   do
     row_count=$((row_count+1))
@@ -95,9 +103,9 @@ run () {
       if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
       then
         curl -L "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" >>curl_gas.log 2>/dev/null
-        if [ "$(cat curl_gas.log | jq .result)" = "true" ]
+        if [ "$(cat ${curl_log} | jq .result)" = "true" ]
         then
-          translate_line="$(cat curl_gas.log | jq .translate)"
+          translate_line="$(cat ${curl_log} | jq .translate)"
           echo "${translate_line}" >>${transfile}
           echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
 
@@ -122,6 +130,7 @@ run () {
       echo "[TRANSLATE PROGRESS]"
     fi
   done <"${arg}"
+  rm ${curl_log}
 
   echo "[COMPLETE] Done ${arg} -> ${transfile}"
   echo
