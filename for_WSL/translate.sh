@@ -94,7 +94,7 @@ run () {
       source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
       if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
       then
-        curl -L "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" >>curl_gas.log
+        curl -L "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" >>curl_gas.log 2>/dev/null
         if [ "$(cat curl_gas.log | jq .result)" = "true" ]
         then
           translate_line="$(cat curl_gas.log | jq .translate)"
