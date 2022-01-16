@@ -65,13 +65,16 @@ run () {
 
   # 言語検出。ファイルの一行目を取得する。
   # ここでは基本的に日本語に変換するが、入力が日本語だったり、言語を検出できない場合は英語にする
-  target=":ja"
-  result="$(trans -b ${target} "$(head -n 1 "${arg}")" 2>/dev/null)"
+  target="ja"
+  source="en"
+  result="$(trans -b :${target} "$(head -n 1 "${arg}")" 2>/dev/null)"
   transfile="${transja_file}"
 
   if [ "$(head -n 1 "${arg}")" = "${result}" -o -n "$(echo "${result}" | grep 'Did you mean: ')" ]
   then
-    target=":en"
+    target="en"
+    source="ja"
+    
     transfile="${transen_file}"
   fi
 
@@ -80,15 +83,39 @@ run () {
   echo "[INFO] Run translate(${target}): ${arg} -> ${transfile}"
 
   row_count=0
+  echo >curl_gas.log
   while read line
   do
     row_count=$((row_count+1))
     if [ -n "${line}" ]
     then
-      translate_line="$(trans -b ${target} "${line}" 2>/dev/null)"
-      echo "${translate_line}" >>${transfile}
-      echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
-      wait  # API制限に引っかかるので、待機時間を入れる
+    
+      # jqコマンドが使えるならGASに問い合わせてみる
+      source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
+      if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
+      then
+        curl -L "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" >>curl_gas.log
+        if [ "$(cat curl_gas.log | jq .result)" = "true" ]
+        then
+          translate_line="$(cat curl_gas.log | jq .translate)"
+          echo "${translate_line}" >>${transfile}
+          echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+
+        # curlに失敗した場合は、当初案通りtranslate-shellを使う
+        else
+          translate_line="$(trans -b :${target} "${line}" 2>/dev/null)"
+          echo "${translate_line}" >>${transfile}
+          echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+          wait  # API制限に引っかかるので、待機時間を入れる
+        fi
+
+      # jqが使えない場合は、当初案通りtranslate-shellを使う
+      else
+        translate_line="$(trans -b :${target} "${line}" 2>/dev/null)"
+        echo "${translate_line}" >>${transfile}
+        echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+        wait  # API制限に引っかかるので、待機時間を入れる
+      fi
 
     else
       echo >>${transfile}
