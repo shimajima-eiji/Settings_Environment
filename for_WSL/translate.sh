@@ -1,6 +1,6 @@
 #!/bin/sh
 ### need `apt install translate-shell`
-### curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_WSL/translate.bsh | bash -s "(変換したいファイルパス)"
+### curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_WSL/translate.sh | sh -s "(変換したいファイルパス)"
 ### .gitや.githubディレクトリなど、隠しファイルは対象にしない。
 
 # transコマンドが使えなければやらない
@@ -68,9 +68,6 @@ run () {
   target=":ja"
   result="$(trans -b ${target} "$(head -n 1 "${arg}")" 2>/dev/null)"
   transfile="${transja_file}"
-
-  echo "command: $(head -n 1 "${arg}")"
-  echo "result: ${result}"
 
   if [ "$(head -n 1 "${arg}")" = "${result}" -o -n "$(echo "${result}" | grep 'Did you mean: ')" ]
   then
