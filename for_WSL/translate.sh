@@ -65,10 +65,10 @@ run () {
 
   # 言語検出。ファイルの一行目を取得する。
   # ここでは基本的に日本語に変換するが、入力が日本語だったり、言語を検出できない場合は英語にする
-  result="$(trans -b "$(head -n 1 "${arg}")" 2>/dev/null)"
   target=":ja"
+  result="$(trans -b ${target} "$(head -n 1 "${arg}")" 2>/dev/null)"
   transfile="${transja_file}"
-  
+
   echo "command: $(head -n 1 "${arg}")"
   echo "result: ${result}"
 
