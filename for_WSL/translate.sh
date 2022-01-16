@@ -68,6 +68,9 @@ run () {
   result="$(trans -b "$(head -n 1 "${arg}")" 2>/dev/null)"
   target=":ja"
   transfile="${transja_file}"
+  
+  echo "command: $(head -n 1 "${arg}")"
+  echo "result: ${result}"
 
   if [ "$(head -n 1 "${arg}")" = "${result}" -o -n "$(echo "${result}" | grep 'Did you mean: ')" ]
   then
