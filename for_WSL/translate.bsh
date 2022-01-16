@@ -1,0 +1,108 @@
+#!/bin/bash
+### need `apt install translate-shell`
+### curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_WSL/translate.bsh | sh -s "(変換したいファイルパス)"
+### .gitや.githubディレクトリなど、隠しファイルは対象にしない。
+
+# transコマンドが使えなければやらない
+if [ -z "$(which trans)" ]
+then
+  echo "[Stop] not found 'trans(translate-shell)'"
+  exit 1
+fi
+
+# ディレクトリパスを引数に指定されていない場合はやらない
+arg=$1
+if ! [ -d "${arg}" -o -f "${arg}" ]
+then
+  echo "[Stop] Require arg. or arg isn't file or directory. ${arg}"
+  exit 1
+fi
+
+# API制限を回避する
+wait () {
+  # FYI: https://qiita.com/eggplants/items/f3de713add0bb4f0548f
+  sleep $[RANDOM%5+5]
+}
+
+# [Hint] 変換したファイルや行数が知りたい場合は、ファイル行数からカウントすべき
+run () {
+  arg=$1
+
+  # バイナリファイルは変換できないのでスキップ
+  if [ -n "$(file --mime ${arg} | grep 'charset=binary')" ]
+  then
+    echo "[Skip] File is binary: ${arg}"
+    return 1
+  fi
+
+  #  既に変換済みのファイルの場合はスキップする（更新時は変換ファイルを手動削除すること）
+  transfile="${arg%.*}_en.md"
+  if [ -f "${transfile}" ]
+  then
+    echo "[Skip] Already translate: ${transfile}"
+    echo "[Hint] Case: updated ${arg}. 'rm ${transfile}' after push."
+    return 1
+  fi
+
+  # 言語検出。ファイルの一行目を取得する。
+  # ここでは基本的に日本語に変換するが、入力が日本語だったり、言語を検出できない場合は英語にする
+  result="$(trans -b $(tail -n 1 ${arg}) 2>/dev/null)"
+  target=":ja"
+  if [ "$(tail -n 1 ${arg})" = "${result}" -o -n "$(echo ${result} | grep 'Did you mean: ')" ]
+  then
+    target=":en"
+  fi
+
+  # ファイルから全ての行を抽出して変換する。
+  echo
+  echo "[INFO] Run translate: ${arg}"
+  while read line
+  do
+    if [ -n "${line}" ]
+    then
+      translate_line="$(trans -b ${target} ${line} 2>/dev/null)"
+      echo "${translate_line}" >>${transfile}
+      echo "[TRANSLATE PROGRESS] ${line} -> ${translate_line}"
+      wait  # API制限に引っかかるので、待機時間を入れる
+
+    else
+      echo >>${transfile}
+      echo "[TRANSLATE PROGRESS]"
+    fi
+  done <"${arg}"
+
+  echo "[COMPLETE] Done ${arg} -> ${transfile}"
+  echo
+  return 0
+}
+
+count=0  # 変換したファイル数をカウント
+find_file () {
+  arg="$1"
+
+  # 変数がファイルなら変換処理
+  if [ -f "${arg}" ]
+  then
+    run "${arg}"
+
+    if [ $? -eq 0 ]
+    then
+      count=$((count+1))
+    fi
+    echo "OK"
+
+  # 変数がファイル以外ならディレクトリを移動してサーチする
+  else
+    cd "${arg}"
+
+    for path in *
+    do
+      find_file "${path}"
+    done
+    cd ..
+    echo
+  fi
+}
+
+find_file "${arg}"
+echo ${count}  # "[COMPLETE] translate files: ${count}"
