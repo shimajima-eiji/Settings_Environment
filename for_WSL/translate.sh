@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ### need `apt install translate-shell`
 ### curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_WSL/translate.bsh | bash -s "(変換したいファイルパス)"
 ### .gitや.githubディレクトリなど、隠しファイルは対象にしない。
@@ -20,8 +20,9 @@ fi
 
 # API制限を回避する
 wait () {
-  # FYI: https://qiita.com/eggplants/items/f3de713add0bb4f0548f
-  # sleep $[RANDOM%5+5]
+  # FYI:
+  # - https://qiita.com/eggplants/items/f3de713add0bb4f0548f
+  # - https://webbibouroku.com/Blog/Article/linux-rand
   sleep "$(($(od -An -tu2 -N2 /dev/urandom | tr -d ' ')%5))"
 }
 
@@ -64,11 +65,11 @@ run () {
 
   # 言語検出。ファイルの一行目を取得する。
   # ここでは基本的に日本語に変換するが、入力が日本語だったり、言語を検出できない場合は英語にする
-  result="$(trans -b "$(head -n 1 ${arg})" 2>/dev/null)"
+  result="$(trans -b "$(head -n 1 "${arg}")" 2>/dev/null)"
   target=":ja"
   transfile="${transja_file}"
 
-  if [ "$(head -n 1 ${arg})" = "${result}" -o -n "$(echo ${result} | grep 'Did you mean: ')" ]
+  if [ "$(head -n 1 "${arg}")" = "${result}" -o -n "$(echo "${result}" | grep 'Did you mean: ')" ]
   then
     target=":en"
     transfile="${transen_file}"
@@ -77,13 +78,16 @@ run () {
   # ファイルから全ての行を抽出して変換する。
   echo
   echo "[INFO] Run translate(${target}): ${arg} -> ${transfile}"
+
+  row_count=0
   while read line
   do
+    row_count=$((row_count+1))
     if [ -n "${line}" ]
     then
       translate_line="$(trans -b ${target} "${line}" 2>/dev/null)"
       echo "${translate_line}" >>${transfile}
-      echo "[TRANSLATE PROGRESS] ${line} -> ${translate_line}"
+      echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
       wait  # API制限に引っかかるので、待機時間を入れる
 
     else
@@ -123,24 +127,6 @@ find_file () {
     echo
   fi
 }
-
-### 検証: bashで実行されないと動かない仕組みは必要か？
-### bashで実行されれば動かす
-# if [ ! "$0" = "bash" ]
-# then
-#   find_file "${arg}"
-#   echo "[COMPLETE] translate files:"
-#   echo ${count}
-
-# # bashで実行されていない場合はbashで実行させる。
-# elif [ -n "$(which bash)" ]
-# then
-#   curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_WSL/translate.bsh | bash -s -- "${arg}"
-
-# # bashがない場合は処理させない
-# else
-#   exit 1
-# fi
 
 find_file "${arg}"
 echo "[COMPLETE] translate files:"
