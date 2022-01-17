@@ -18,6 +18,9 @@ then
   exit 1
 fi
 
+source_arg=$2
+target_arg=$3
+
 # API制限を回避する
 wait () {
   # FYI:
@@ -30,7 +33,9 @@ wait () {
 run () {
   echo  # メッセージを見やすくするため、改行する
   arg=$1
-
+  source_arg=$2
+  target_arg=$3
+  
   # バイナリファイルは変換できないのでスキップ
   if [ -n "$(file --mime ${arg} | grep 'charset=binary')" ]
   then
@@ -70,19 +75,27 @@ run () {
     return 1
   fi
 
-  # 言語検出。ファイルの一行目を取得する。
-  # ここでは基本的に日本語に変換するが、入力が日本語だったり、言語を検出できない場合は英語にする
-  target="ja"
-  source="en"
-  result="$(trans -b :${target} "$(head -n 1 "${arg}")" 2>/dev/null)"
-  transfile="${transja_file}"
-
-  if [ "$(head -n 1 "${arg}")" = "${result}" -o -n "$(echo "${result}" | grep 'Did you mean: ')" ]
+  # 翻訳する言語が決まっている場合は判定しない
+  if [ -n "${source_arg}" -a -n "${target_arg}" ]
   then
-    target="en"
-    source="ja"
-    
-    transfile="${transen_file}"
+    source=${source_arg}
+    target=${target_arg}
+  
+  else
+    # 言語検出。ファイルの一行目を取得する。
+    # ここでは基本的に日本語に変換するが、入力が日本語だったり、言語を検出できない場合は英語にする
+    target="ja"
+    source="en"
+    result="$(trans -b :${target} "$(head -n 1 "${arg}")" 2>/dev/null)"
+    transfile="${transja_file}"
+
+    if [ "$(head -n 1 "${arg}")" = "${result}" -o -n "$(echo "${result}" | grep 'Did you mean: ')" ]
+    then
+      target="en"
+      source="ja"
+
+      transfile="${transen_file}"
+    fi
   fi
 
   # ファイルから全ての行を抽出して変換する。
@@ -164,6 +177,6 @@ find_file () {
   fi
 }
 
-find_file "${arg}"
+find_file "${arg}" "${source_arg}" "${target_arg}"
 echo "[COMPLETE] translate files:"
 echo ${count}
