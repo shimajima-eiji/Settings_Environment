@@ -2,6 +2,7 @@
 ### need `apt install translate-shell`
 ### curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_WSL/translate.sh | sh -s "(変換したいファイルパス)"
 ### .gitや.githubディレクトリなど、隠しファイルは対象にしない。
+### 実運用時は出力を捨てた方が使いやすいかもしれない。
 
 # transコマンドが使えなければやらない
 if [ -z "$(which trans)" ]
@@ -102,45 +103,75 @@ run () {
   echo
   echo "[INFO] Run translate(${target}): ${arg} -> ${transfile}"
 
+  # 初期設定
   row_count=0
+  source_flag='false'
   curl_log=curl_gas.log
   echo >${curl_log}
+  
+  # ファイル走査
   while read line
   do
     row_count=$((row_count+1))
-    if [ -n "${line}" ]
+    
+    # 改行ではない場合
+    if [ -n "${line}"　 ]
     then
     
-      # jqコマンドが使えるならGASに問い合わせてみる
-      source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
-      if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
+      # markdownのソースコード表記は、フラグを入れ替えて```を追記
+      if [ "${line}" = '```' ]
       then
-        curl -L "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" >>curl_gas.log 2>/dev/null
-        if [ "$(cat ${curl_log} | jq .result)" = "true" ]
+        if [ "${source_flag}" = 'true' ]
         then
-          translate_line="$(cat ${curl_log} | jq .translate)"
-          echo "${translate_line}" >>${transfile}
-          echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+          source_flag='false'
+          
+        else
+          source_flag='true'
+          
+        fi
+        echo "${line}" >>${transfile}
+        echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+      
+      # ソースコードの場合は翻訳しない
+      elif [ "${source_flag}" = 'true' ]
+      then
+        echo "${line}" >>${transfile}
+        echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+        
+      # ソースコードではない場合は翻訳する
+      else
+        # jqコマンドが使えるならGASに問い合わせてみる
+        source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
+        if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
+        then
+          curl -L "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" >>curl_gas.log 2>/dev/null
+          if [ "$(cat ${curl_log} | jq .result)" = "true" ]
+          then
+            translate_line="$(cat ${curl_log} | jq .translate)"
+            echo "${translate_line}" >>${transfile}
+            echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
 
-        # curlに失敗した場合は、当初案通りtranslate-shellを使う
+          # curlに失敗した場合は、当初案通りtranslate-shellを使う
+          else
+            translate_line="$(trans -b :${target} "${line}" 2>/dev/null)"
+            echo "${translate_line}" >>${transfile}
+            echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+            wait  # API制限に引っかかるので、待機時間を入れる
+          fi
+
+        # jqが使えない場合は、当初案通りtranslate-shellを使う
         else
           translate_line="$(trans -b :${target} "${line}" 2>/dev/null)"
           echo "${translate_line}" >>${transfile}
           echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
           wait  # API制限に引っかかるので、待機時間を入れる
         fi
-
-      # jqが使えない場合は、当初案通りtranslate-shellを使う
-      else
-        translate_line="$(trans -b :${target} "${line}" 2>/dev/null)"
-        echo "${translate_line}" >>${transfile}
-        echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
-        wait  # API制限に引っかかるので、待機時間を入れる
       fi
 
+    # 改行の場合
     else
       echo >>${transfile}
-      echo "[TRANSLATE PROGRESS]"
+      echo "[TRANSLATE PROGRESS] ${row_count}:"
     fi
   done <"${arg}"
   rm ${curl_log}
