@@ -6,14 +6,10 @@ import json      # need pip
 import sys
 
 args = sys.argv
-output_file = args[1]
-text = args[2]
-source = args[3]
-target = args[4]
+ENDPOINT = args[1]
+output_file = args[2]
 
-ENDPOINT = 'https://script.google.com/macros/s/AKfycbxb_apSejoLX7iyP4WWUAJHB8twLoI40QdL5G9C6O5d_DAmjYVQY37ndj6Uakh_pnOPtQ/exec'
-
-response = requests.get(f'{ENDPOINT}?text={text}&source={source}&target={target}')
+response = requests.get(ENDPOINT)
 data = response.json()
 
 with open(output_file, 'w') as f:
