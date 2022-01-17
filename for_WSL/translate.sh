@@ -148,7 +148,7 @@ run () {
           curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/shimajima-eiji-patch-1/for_WSL/translate_curl.py | python "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" "${curl_log}" 2>/dev/null
 
           # curlが成功した時はTranslate-GASの結果を入れる。2>/dev/nullは${curl_log}が存在しなかった場合にエラーメッセージを吐くため
-          if [ -f "${curl_log}" -a "$(cat ${curl_log} | jq .result 2>/dev/null)" = "true" ]
+          if [ -f "${curl_log}" -a "$(cat ${curl_log} 2>/dev/null | jq .result)" = "true" ]
           then
             translate_line="$(cat ${curl_log} | jq .translate)"
             echo "${translate_line}" >>${transfile}
