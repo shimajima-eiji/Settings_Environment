@@ -36,6 +36,7 @@ run () {
   arg=$1
   source_arg=$2
   target_arg=$3
+  echo "[DEBUG] After: ${source_arg} / ${target_arg}"
   
   # バイナリファイルは変換できないのでスキップ
   if [ -n "$(file --mime ${arg} | grep 'charset=binary')" ]
@@ -209,7 +210,7 @@ find_file () {
   fi
 }
 
-echo "[DEBUG] ${source_arg} / ${target_arg}"
+echo "[DEBUG] Before: ${source_arg} / ${target_arg}"
 find_file "${arg}" "${source_arg}" "${target_arg}"
 echo "[COMPLETE] translate files:"
 echo ${count}
