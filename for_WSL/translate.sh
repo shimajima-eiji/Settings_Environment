@@ -36,8 +36,7 @@ run () {
   arg=$1
   source_arg=$2
   target_arg=$3
-  echo "[DEBUG] After: ${source_arg} / ${target_arg}"
-  
+
   # バイナリファイルは変換できないのでスキップ
   if [ -n "$(file --mime ${arg} | grep 'charset=binary')" ]
   then
@@ -51,7 +50,7 @@ run () {
     echo "[Skip] File is exclude extension[.log]: ${arg}"
     return 1
   fi
-  
+
   # ファイル名が「_」から始まる場合は対象にしない
   if [ "$(basename "${arg}" | cut -c1 )" = "_" ]
   then
@@ -83,7 +82,7 @@ run () {
   then
     source=${source_arg}
     target=${target_arg}
-  
+
   else
     # 言語検出。ファイルの一行目を取得する。
     # ここでは基本的に日本語に変換するが、入力が日本語だったり、言語を検出できない場合は英語にする
@@ -110,36 +109,36 @@ run () {
   source_flag='false'
   curl_log=curl_gas.log
   echo >${curl_log}
-  
+
   # ファイル走査
   while read line
   do
     row_count=$((row_count+1))
-    
+
     # 改行ではない場合
     if [ -n "${line}"　 ]
     then
-    
+
       # markdownのソースコード表記は、フラグを入れ替えて```を追記
       if [ "${line}" = '```' ]
       then
         if [ "${source_flag}" = 'true' ]
         then
           source_flag='false'
-          
+
         else
           source_flag='true'
-          
+
         fi
         echo "${line}" >>${transfile}
         echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
-      
+
       # ソースコードの場合は翻訳しない
       elif [ "${source_flag}" = 'true' ]
       then
         echo "${line}" >>${transfile}
         echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
-        
+
       # ソースコードではない場合は翻訳する
       else
         # jqコマンドが使えるならGASに問い合わせてみる
@@ -186,11 +185,13 @@ run () {
 count=0  # 変換したファイル数をカウント
 find_file () {
   arg="$1"
+  source_arg=$2
+  target_arg=$3
 
   # 変数がファイルなら変換処理
   if [ -f "${arg}" ]
   then
-    run "${arg}"
+    run "${arg}" "${source_arg}" "${target_arg}"
 
     if [ $? -eq 0 ]
     then
@@ -203,7 +204,7 @@ find_file () {
 
     for path in *
     do
-      find_file "${path}"
+      find_file "${path}" "${source_arg}" "${target_arg}"
     done
     cd ..
     echo
