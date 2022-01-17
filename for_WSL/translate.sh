@@ -147,7 +147,7 @@ run () {
           curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/shimajima-eiji-patch-1/for_WSL/translate_curl.py | python3 "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" "${curl_log}"
 
           # curlが成功した時はTranslate-GASの結果を入れる
-          if [ "$(cat ${curl_log} | jq .result)" = "true" ]
+          if [ -f "${curl_log}" -a "$(cat ${curl_log} | jq .result)" = "true" ]
           then
             translate_line="$(cat ${curl_log} | jq .translate)"
             echo "${translate_line}" >>${transfile}
