@@ -77,11 +77,11 @@ run () {
   fi
 
   # 翻訳する言語が決まっている場合は判定しない
-  echo "[DEBUG] ${source_arg} / ${target_arg}"
   if [ -n "${source_arg}" -a -n "${target_arg}" ]
   then
     source=${source_arg}
     target=${target_arg}
+    transfile="${arg%.*}_${target_arg}.md"
 
   else
     # 言語検出。ファイルの一行目を取得する。
@@ -108,7 +108,7 @@ run () {
   row_count=0
   source_flag='false'
   curl_log=curl_gas.log
-  echo >${curl_log}
+  source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
 
   # ファイル走査
   while read line
@@ -116,7 +116,7 @@ run () {
     row_count=$((row_count+1))
 
     # 改行ではない場合
-    if [ -n "${line}"　 ]
+    if [ -n "${line}" ]
     then
 
       # markdownのソースコード表記は、フラグを入れ替えて```を追記
@@ -131,38 +131,39 @@ run () {
 
         fi
         echo "${line}" >>${transfile}
-        echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+        echo "[TRANSLATE PROGRESS] ${row_count}: ${line}"
 
       # ソースコードの場合は翻訳しない
       elif [ "${source_flag}" = 'true' ]
       then
         echo "${line}" >>${transfile}
-        echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
+        echo "[TRANSLATE PROGRESS] ${row_count}: ${line}"
 
       # ソースコードではない場合は翻訳する
       else
         # jqコマンドが使えるならGASに問い合わせてみる
-        source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
         if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
         then
-          curl -L "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" >>curl_gas.log 2>/dev/null
+          curl -L "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" >${curl_log} 2>/dev/null
+
+          # curlが成功した時はTranslate-GASの結果を入れる
           if [ "$(cat ${curl_log} | jq .result)" = "true" ]
           then
             translate_line="$(cat ${curl_log} | jq .translate)"
             echo "${translate_line}" >>${transfile}
             echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
 
-          # curlに失敗した場合は、当初案通りtranslate-shellを使う
+          # curlに失敗した場合は、translate-shellを使う
           else
-            translate_line="$(trans -b :${target} "${line}" 2>/dev/null)"
+            translate_line="$(trans -b ${source}:${target} "${line}" 2>/dev/null)"
             echo "${translate_line}" >>${transfile}
             echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
             wait  # API制限に引っかかるので、待機時間を入れる
           fi
 
-        # jqが使えない場合は、当初案通りtranslate-shellを使う
+        # jqが使えない場合は、translate-shellを使う
         else
-          translate_line="$(trans -b :${target} "${line}" 2>/dev/null)"
+          translate_line="$(trans -b ${source}:${target} "${line}" 2>/dev/null)"
           echo "${translate_line}" >>${transfile}
           echo "[TRANSLATE PROGRESS] ${row_count}: ${line} -> ${translate_line}"
           wait  # API制限に引っかかるので、待機時間を入れる
@@ -211,7 +212,6 @@ find_file () {
   fi
 }
 
-echo "[DEBUG] Before: ${source_arg} / ${target_arg}"
 find_file "${arg}" "${source_arg}" "${target_arg}"
 echo "[COMPLETE] translate files:"
 echo ${count}
