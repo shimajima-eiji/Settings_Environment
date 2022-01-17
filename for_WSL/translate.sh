@@ -107,7 +107,7 @@ run () {
   # 初期設定
   row_count=0
   source_flag='false'
-  curl_log=curl_gas.log
+  curl_log="$(pwd)/curl_gas.log"
   source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
 
   # ファイル走査
