@@ -109,6 +109,13 @@ run () {
   source_flag='false'
   curl_log="$(pwd)/curl_gas.log"
   source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
+  curl_py="curl_translate.py"
+
+  # jqコマンドが使えるならGASに問い合わせてみる
+  if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
+  then
+    curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/shimajima-eiji-patch-1/for_WSL/translate_curl.py >${curl_py}
+  fi
 
   # ファイル走査
   while read line
@@ -141,10 +148,10 @@ run () {
 
       # ソースコードではない場合は翻訳する
       else
-        # jqコマンドが使えるならGASに問い合わせてみる
-        if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
+        # pyをcurlしているならGASを優先する
+        if [ -f "${curl_py}" ]
         then
-          curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/shimajima-eiji-patch-1/for_WSL/translate_curl.py | python "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" "${curl_log}" 2>/dev/null
+          python "${curl_py}" "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" "${curl_log}"
 
           # curlが成功した時はTranslate-GASの結果を入れる。2>/dev/nullは${curl_log}が存在しなかった場合にエラーメッセージを吐くため
           if [ -f "${curl_log}" -a "$(cat ${curl_log} 2>/dev/null | jq .result)" = "true" ]
@@ -181,6 +188,11 @@ run () {
   if [ -f "${curl_log}" ]
   then
     rm ${curl_log}
+  fi
+  # GASを使っている場合ｊは不要なファイルが残るので削除
+  if [ -f "${curl_py}" ]
+  then
+    rm ${curl_py}
   fi
 
   echo "[COMPLETE] Done ${arg} -> ${transfile}"
