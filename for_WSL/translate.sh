@@ -114,7 +114,7 @@ run () {
   # jqコマンドが使えるならGASに問い合わせてみる
   if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
   then
-    curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/shimajima-eiji-patch-1/for_WSL/translate_curl.py >${curl_py}
+    curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/main/for_WSL/translate_curl.py >${curl_py}
   fi
 
   # ファイル走査
