@@ -77,6 +77,7 @@ run () {
   fi
 
   # 翻訳する言語が決まっている場合は判定しない
+  echo "[DEBUG] ${source_arg} / ${target_arg}"
   if [ -n "${source_arg}" -a -n "${target_arg}" ]
   then
     source=${source_arg}
