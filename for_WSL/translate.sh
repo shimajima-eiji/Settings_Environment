@@ -109,7 +109,6 @@ run () {
   source_flag='false'
   curl_log=curl_gas.log
   source ~/.env  # GAS_TRANSLATE_ENDPOINTを呼び出す
-  touch >${transfile}
 
   # ファイル走査
   while read line
@@ -177,7 +176,12 @@ run () {
       echo "[TRANSLATE PROGRESS] ${row_count}:"
     fi
   done <"${arg}"
-  rm ${curl_log}
+
+  # GASを使っている場合ｊは不要なファイルが残るので削除
+  if [ -f "${curl_log}" ]
+  then
+    rm ${curl_log}
+  fi
 
   echo "[COMPLETE] Done ${arg} -> ${transfile}"
   echo
