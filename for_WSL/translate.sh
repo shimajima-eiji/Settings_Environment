@@ -144,7 +144,7 @@ run () {
         # jqコマンドが使えるならGASに問い合わせてみる
         if [ "$(which jq)" -a -n "${GAS_TRANSLATE_ENDPOINT}" ]
         then
-          curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/shimajima-eiji-patch-1/for_WSL/translate_curl.py | python3 "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" "${curl_log}"
+          curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/shimajima-eiji-patch-1/for_WSL/translate_curl.py | python "${GAS_TRANSLATE_ENDPOINT}?text=${line}&source=${source}&target=${target}" "${curl_log}" 2>/dev/null
 
           # curlが成功した時はTranslate-GASの結果を入れる
           if [ -f "${curl_log}" -a "$(cat ${curl_log} | jq .result)" = "true" ]
