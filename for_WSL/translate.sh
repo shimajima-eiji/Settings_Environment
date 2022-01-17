@@ -209,6 +209,7 @@ find_file () {
   fi
 }
 
+echo "[DEBUG] ${source_arg} / ${target_arg}"
 find_file "${arg}" "${source_arg}" "${target_arg}"
 echo "[COMPLETE] translate files:"
 echo ${count}
