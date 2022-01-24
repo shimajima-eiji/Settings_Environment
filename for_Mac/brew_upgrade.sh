@@ -1,87 +1,17 @@
 #!/bin/sh
-# crontabの元ファイルは`/usr/lib/cron/tabs/USER`を参照（要root）
+### crontabの元ファイルは`/usr/lib/cron/tabs/USER`を参照（要root）
+### インストールは以下
+### Mac: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+### Linux: `/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"`
 
-# 後述の引数チェックでログディレクトリを指定しない場合が考えられるため、初期値を入れておく
-log_directory=~/logs
-
-for arg in "$@"; do
-
-  # 引数を-iか--installを完全一致で検索し、ヒットすればインストールフラグを立てる。それ以外の引数はログディレクトリとして扱う
-  # grep -x -- '-i' -e -x -- '--install'は、最初の--で無効化されるため、別プロセスで実行するように条件を書き換えている
-  if [ -n "$(echo "${arg}" | grep -x -- '-i')" -o -n "$(echo "${arg}" | grep -x -- '--install')" ]
-  then
-    install_flag="-i"
-  else
-    log_directory="${arg}"
-  fi
-done
-
-output_path=${log_directory}/brew_upgrade.log
-
-# ルートを指定できないようにする
-if [ "$(dirname ${output_path})" = "/" ]
+log_directory="${1:-~/logs/brew_upgrade.log}"
+if [ -n "$(which brew)" ]
 then
-  echo "[Stop] The specified path is the root. ${output_path}"
-  exit 1
-fi
-
-# ログを出力するディレクトリを調べる。パスがディレクトリ名と一致したファイルもしくはシンボリックリンクだった場合、ログを作らない
-if [ -f "${log_directory}" -o -L "${log_directory}" ]
-then
-  echo "[Warn]Failed to create log directory: ${log_directory}"
-  log_directory=""
-  
-# ファイルもディレクトリも存在しない場合は、ディレクトリを作成する。
-elif [ ! -d "${log_directory}" ]
-then
-  mkdir -p ${log_directory}
-  if [ ! "$?" = "0" ]
-  then
-    echo "[Warn]Failed to create log directory: ${log_directory}"
-    log_directory=""
-  fi
-fi
-
-# ログファイルを書き込む場合、既に古いログファイルが存在していたら予め削除しておく
-if [ -n "${log_directory}" -a -f "${output_path}" ]
-then
-  rm ${output_path}
-fi
-
-if [ -z "$(which brew)" ]
-then
-
-  # brewのインストールフラグがあればインストール
-  if [ -n "${install_flag}" ]
-  then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
-    # brewのインストールに失敗した場合、updateはできないので終了する
-    if [ -z "$(which brew)" ]
-    then
-      echo "[Stop] Failed to brew install"
-      echo "command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""
-      echo ""
-      echo "[Hint] Make sure the ¥$PATH contains [/usr/local/bin/brew] ?"
-      exit 1
-    fi
-
-  # インストールフラグがなければ終了
-  else
-    echo "[Stop] brew not found."
-    exit 1
-  fi
-
-# brewが存在していればupdateを実行
-else
   brew upgrade >${output_path}
   message="[complate] brew upgrade. [$(date)]"
+
+  # tee
   echo "${message}"
-  
-  # ログファイルを書く場合のみ、ログファイルにも出力する
-  if [ -n "${log_directory}" ]
-  then
-    echo "${message}" >>${output_path}
-  fi
+  echo "${message}" >>${log_directory}
 fi
 
