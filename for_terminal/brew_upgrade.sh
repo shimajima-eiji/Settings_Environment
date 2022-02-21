@@ -1,12 +1,30 @@
 #!/bin/sh
-### crontabの元ファイルは`/usr/lib/cron/tabs/USER`を参照（要root）
-### インストールは以下
-### Mac: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-### Linux: `/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"`
 
-curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Operation-Maintenance/main/for_Development/setup_develop-code.sh >./setup_develop-code.sh
-source ./setup_develop-code.sh
-rm ./setup_develop-code.sh
+: <<README
+# brew_upgrade.sh
+## 概要
+インストールされていない場合はスキップする
+なお、インストールは以下
+
+#``
+# Mac
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Linux
+/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+#``
+
+## READMEバージョン
+2022.02.21
+
+README
+
+if [ ! "$(type -t __check_setup_develop_code)" = "function" ]
+then
+  curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Operation-Maintenance/main/for_Development/setup_develop-code.sh >./setup_develop-code.sh
+  source ./setup_develop-code.sh
+  rm ./setup_develop-code.sh
+fi
 
 __start $0
 
