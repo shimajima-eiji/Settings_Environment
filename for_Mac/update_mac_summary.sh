@@ -6,8 +6,7 @@
 # インストール: `curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac/update_mac_summary.sh | sh -s -- -i`
 # -iまたは--installを引数に渡すと、インストールを許可する（それぞれのスクリプトを参照）
 
-curl_directory=https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_Mac
-install_arg=""  # 初期値はupdateとしたいので空
+curl_directory=https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_terminal
 
 # 引数が-iか--installの時だけインストールフラグを立てる
 if [ "$1" = "-i" -o "$1" = "--install" ]
