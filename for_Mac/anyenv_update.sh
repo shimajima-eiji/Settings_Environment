@@ -1,20 +1,17 @@
 #!/bin/sh
-# Thanks: https://zenn.dev/ryuu/articles/use-anyversions
+curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Operation-Maintenance/main/for_Development/setup_develop-code.sh >./setup_develop-code.sh
+source ./setup_develop-code.sh
+rm ./setup_develop-code.sh
 
-install_arg=$1
+__start $0
+__search_shell $0
+# FYI: https://zenn.dev/ryuu/articles/use-anyversions
 
+# anyenvが使えない場合は処理をしない
 if [ -z "$(which anyenv)" ]
 then
-
-  # 引数があればインストールオプションとして扱うため、brew_upgrade.shのような厳密なロジックを入れない
-  if [ -n "${install_arg}" ]
-  then
-    echo "[Info] 'anyenv' not found. install by brew"
-    
-  else
-    echo "[Stop] 'anyenv' not found."
-    exit 1
-  fi
+  __skip "'anyenv' not installed."
+  __end $0
 fi
 
 # .anyenv 配下にプラグイン管理用のディレクトリ作成
@@ -31,3 +28,5 @@ fi
 
 # インストールされたenvの一括アップデート
 anyenv update
+
+__end $0
