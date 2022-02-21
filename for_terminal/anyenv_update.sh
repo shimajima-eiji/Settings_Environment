@@ -1,11 +1,33 @@
 #!/bin/sh
-curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Operation-Maintenance/main/for_Development/setup_develop-code.sh >./setup_develop-code.sh
-source ./setup_develop-code.sh
-rm ./setup_develop-code.sh
+
+: <<README
+# anyenv_update.sh
+## 概要
+
+
+## 使い方
+#``
+curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Settings_Environment/main/for_Mac/anyenv_update.sh | sh -s
+#``
+
+## 参考
+- [オールインワンな開発環境をanyenvで構築する](https://zenn.dev/ryuu/articles/use-anyversions)
+
+## READMEバージョン
+2022.02.21
+
+README
+
+# 
+if [ ! "$(type -t __check_setup_develop_code)" = "function" ]
+then
+  curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Operation-Maintenance/main/for_Development/setup_develop-code.sh >./setup_develop-code.sh
+  source ./setup_develop-code.sh
+  rm ./setup_develop-code.sh
+fi
 
 __start $0
 __search_shell $0
-# FYI: https://zenn.dev/ryuu/articles/use-anyversions
 
 # anyenvが使えない場合は処理をしない
 if [ -z "$(which anyenv)" ]
