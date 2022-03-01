@@ -1,8 +1,7 @@
 # 登録フォーム
-https://account.line.biz/login?redirectUri=https%3A%2F%2Fdevelopers.line.biz%2Fconsole%2F
+- [LINE developer](https://account.line.biz/login?redirectUri=https%3A%2F%2Fdevelopers.line.biz%2Fconsole%2F)
+- [Flex Message Simulator](https://developers.line.biz/flex-simulator/)
+- [LINE Business](https://www.linebiz.com/jp/service/line-official-account/)
+  - スマホアプリが必須
 
 LINEアカウントあるいは、メールアドレスを登録
-
-# LINE business(旧LINEat)
-スマホアプリが必須<br />
-https://www.linebiz.com/jp/service/line-official-account/
